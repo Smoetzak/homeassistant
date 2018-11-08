@@ -1,0 +1,120 @@
+title: Smoethome
+# Include external resources
+resources:
+  - url: /local/my-custom-card.js
+    type: js
+  - url: /local/my-webfont.css
+    type: css
+
+# Optional background for all views. Check https://developer.mozilla.org/en-US/docs/Web/CSS/background for more examples.
+background: center / cover no-repeat url("/background.png") fixed
+# Exclude entities from "Unused entities" view
+excluded_entities:
+  - weblink.router
+views:
+  - icon: mdi:home-assistant
+    # View tab title.
+    title: Overview
+    # Unique id for direct access /lovelace/${id}. If you don't specify one, it is added automatically.
+    id: Overview
+    # Optional background (overwrites the global background).
+    #background: radial-gradient(crimson, skyblue)
+    # Each view can have a different theme applied. Theme should be defined in the frontend.
+    theme: dark-mode
+    # The cards to show on this view.
+    cards:
+        # The filter card will filter entities for their state
+      - id: peoplehome # Every card needs an ID, if you don't specify one, it is added automatically.
+        #type: entity-filter
+        type: glance
+        title: People
+        show_name: false        
+        entities:
+          - device_tracker.evelyn_evelyn
+          - device_tracker.smoetzak_smoetzak
+        #state_filter:
+        #  - 'home'
+        # The picture entity card will represent an entity with a picture
+     #- type: picture-entity
+      # image: https://www.home-assistant.io/images/default-social.png
+      # entit: light.bed_light
+
+      - type: thermostat
+        entity: climate.smoethome
+  
+      
+      
+  - icon: mdi:cast
+    title: Chromecasts
+    cards:
+      - type: entities
+        entities:
+          - entity: media_player.chromecastultra2535        
+          - entity: media_player.chrome_2
+            name: Smoetcast
+        
+    # Specify a tab icon if you want the view tab to be an icon.
+  - icon: mdi:web
+    # Title of the view. Will be used as the tooltip for tab icon
+    title: Links
+    cards:
+        # The markdown card will render markdown text.
+      - type: markdown
+        title: Internal Links
+        content: > 
+          [Freenas](http://192.168.1.200)
+
+          [Sickrage](http://192.168.1.204:8081)
+          
+          [Couchpotato](http://192.168.1.208:5050)
+          
+          [Owncloud](https://192.168.1.207)
+
+
+      - type: markdown
+        title: External Links
+        content: >
+          [Freenas](http://smoetzak.no-ip.info:8000)
+
+          [Sickrage](http://smoetzak.no-ip.info:8081)
+
+          [Couchpotato](http://smoetzak.no-ip.info:5050)
+
+          [Owncloud](https://smoetzak.no-ip.info:9000)
+
+  - icon: mdi:download-network
+    title: Trasmission
+    cards:
+      - type: entities
+        title: Downloader
+        entities:
+          - sensor.transmission_downloader_status
+          - sensor.transmission_downloader_down_speed
+          - sensor.transmission_downloader_up_speed  
+
+      - type: entities
+        title: Uploader
+        entities:
+          - sensor.transmission_uploader_status
+          - sensor.transmission_uploader_down_speed
+          - sensor.transmission_uploader_up_speed     
+
+  - icon: mdi:chart-pie
+    title: Pi-Hole
+    cards:
+      - type: entities
+        title: Pi-Hole
+        entities:
+          - sensor.pihole_ads_blocked_today
+          - sensor.pihole_ads_percentage_blocked_today
+          - sensor.pihole_dns_queries_cached
+          - sensor.pihole_dns_queries_today
+          - sensor.pihole_dns_unique_clients
+          - sensor.pihole_dns_unique_domains
+          - sensor.pihole_domains_blocked
+          - sensor.pihole_seen_clients      
+
+
+      - type: iframe
+        url: http://192.168.1.3/admin/  
+        aspect_ratio: 150%    
