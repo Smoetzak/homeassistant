@@ -23,23 +23,23 @@ views:
     theme: dark-mode
     # The cards to show on this view.
     cards:
-        # The filter card will filter entities for their state
-      - id: peoplehome # Every card needs an ID, if you don't specify one, it is added automatically.
-        #type: entity-filter
-        type: glance
-        #show_name: false        
-        entities:
-          - entity: device_tracker.smoetzak_smoetzak
-            name:
-          - entity: sensor.smoetzak_to_trustteam
-            name: "Time to Trustteam"  
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack      
+            cards:
+              - type: glance
+                entities:
+                  - entity: device_tracker.smoetzak_smoetzak
+                    name:
+                  - entity: sensor.smoetzak_to_trustteam
+                    name: "To Trustteam"  
 
-      - type: glance
-        entities:
-          - entity: device_tracker.evelyn_evelyn
-            name:
-          - entity: sensor.evelyn_to_ardo
-            name: "Time to Ardo"
+              - type: glance
+                entities:
+                  - entity: device_tracker.evelyn_evelyn
+                    name:
+                  - entity: sensor.evelyn_to_ardo
+                    name: "To Ardo"
         #state_filter:
         #  - 'home'
         # The picture entity card will represent an entity with a picture
@@ -47,8 +47,12 @@ views:
       # image: https://www.home-assistant.io/images/default-social.png
       # entit: light.bed_light
 
-      - type: thermostat
-        entity: climate.smoethome
+          - type: thermostat
+            entity: climate.smoethome
+              
+          - type: entities
+            entities:
+              - entity: sensor.smoethome_thermostat_humidity
   
       
       
