@@ -27,11 +27,19 @@ views:
       - id: peoplehome # Every card needs an ID, if you don't specify one, it is added automatically.
         #type: entity-filter
         type: glance
-        title: People
-        show_name: false        
+        #show_name: false        
         entities:
-          - device_tracker.evelyn_evelyn
-          - device_tracker.smoetzak_smoetzak
+          - entity: device_tracker.smoetzak_smoetzak
+            name:
+          - entity: sensor.smoetzak_to_trustteam
+            name: "Time to Trustteam"  
+
+      - type: glance
+        entities:
+          - entity: device_tracker.evelyn_evelyn
+            name:
+          - entity: sensor.evelyn_to_ardo
+            name: "Time to Ardo"
         #state_filter:
         #  - 'home'
         # The picture entity card will represent an entity with a picture
@@ -83,7 +91,7 @@ views:
           [Owncloud](https://smoetzak.no-ip.info:9000)
 
   - icon: mdi:download-network
-    title: Trasmission
+    title: Transmission
     cards:
       - type: entities
         title: Downloader
@@ -117,4 +125,7 @@ views:
 
       - type: iframe
         url: http://192.168.1.3/admin/  
-        aspect_ratio: 150%    
+        aspect_ratio: 150%
+
+
+
