@@ -27,7 +27,7 @@ views:
         cards:
           - type: horizontal-stack      
             cards:
-              # Conditional home/not_home for Smoetzak
+    # Conditional home for Smoetzak and Evelyn on 1st line
               - type: conditional
                 conditions:
                   - entity: device_tracker.smoetzak_smoetzak
@@ -52,7 +52,7 @@ views:
                     - entity: sensor.evelyn_to_ardo
                       name: "To Ardo"
          
-                   
+    # Conditionala not_home for Smoetzak and Evelyn on 2nd line         
           - type: horizontal-stack
             cards:
               - type: conditional
@@ -78,7 +78,7 @@ views:
                       name:        
                     - entity: sensor.smoetzak_to_home
                       name: "To Home"
-
+    # Thermostat and Humidity on 3rd and 4rd Line
           - type: thermostat
             entity: climate.smoethome
               
