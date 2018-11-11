@@ -27,25 +27,57 @@ views:
         cards:
           - type: horizontal-stack      
             cards:
-              - type: glance
-                entities:
+              # Conditional home/not_home for Smoetzak
+              - type: conditional
+                conditions:
                   - entity: device_tracker.smoetzak_smoetzak
-                    name:
-                  - entity: sensor.smoetzak_to_trustteam
-                    name: "To Trustteam"  
-
-              - type: glance
-                entities:
+                    state: "home"
+                card:  
+                  type: glance
+                  entities:
+                    - entity: device_tracker.smoetzak_smoetzak
+                      name:        
+                    - entity: sensor.smoetzak_to_trustteam
+                      name: "To Trustteam"
+                      
+              - type: conditional
+                conditions:
                   - entity: device_tracker.evelyn_evelyn
-                    name:
-                  - entity: sensor.evelyn_to_ardo
-                    name: "To Ardo"
-        #state_filter:
-        #  - 'home'
-        # The picture entity card will represent an entity with a picture
-     #- type: picture-entity
-      # image: https://www.home-assistant.io/images/default-social.png
-      # entit: light.bed_light
+                    state: "home"
+                card:   
+                  type: glance
+                  entities:
+                    - entity: device_tracker.evelyn_evelyn
+                      name:        
+                    - entity: sensor.evelyn_to_ardo
+                      name: "To Ardo"
+         
+                   
+          - type: horizontal-stack
+            cards:
+              - type: conditional
+                conditions:
+                  - entity: device_tracker.evelyn_evelyn
+                    state_not: "home"
+                card:   
+                  type: glance
+                  entities:
+                    - entity: device_tracker.evelyn_evelyn
+                      name:        
+                    - entity: sensor.evelyn_to_home
+                      name: "To Home"
+
+              - type: conditional
+                conditions:
+                  - entity: device_tracker.smoetzak_smoetzak
+                    state_not: "home"
+                card:   
+                  type: glance
+                  entities:
+                    - entity: device_tracker.smoetzak_smoetzak
+                      name:        
+                    - entity: sensor.smoetzak_to_home
+                      name: "To Home"
 
           - type: thermostat
             entity: climate.smoethome
@@ -62,8 +94,8 @@ views:
       - type: entities
         entities:
           - entity: media_player.chromecastultra2535        
-          - entity: media_player.chrome_2
-            name: Smoetcast
+          #- entity: media_player.chrome_2
+            #name: Smoetcast
         
     # Specify a tab icon if you want the view tab to be an icon.
   - icon: mdi:web
