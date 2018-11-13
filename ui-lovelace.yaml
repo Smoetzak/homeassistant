@@ -5,6 +5,8 @@ resources:
     type: js
   - url: /local/my-webfont.css
     type: css
+  - url: /local/light-slider.js
+    type: js
 
 # Optional background for all views. Check https://developer.mozilla.org/en-US/docs/Web/CSS/background for more examples.
 background: center / cover no-repeat url("/background.png") fixed
@@ -12,6 +14,13 @@ background: center / cover no-repeat url("/background.png") fixed
 excluded_entities:
   - weblink.router
 views:
+######################################################################################
+#
+#
+#                                       Homepage
+#
+#
+######################################################################################
   - icon: mdi:home-assistant
     # View tab title.
     title: Overview
@@ -86,8 +95,35 @@ views:
             entities:
               - entity: sensor.smoethome_thermostat_humidity
   
-      
-      
+####################################################################################
+#
+#
+#                       Lights
+#
+#
+###################################################################################
+
+  - icon: mdi:lightbulb
+    title: Lights
+    cards:
+      - type: entities
+        name: "Wake-up Lights"
+        entities:
+          - input_datetime.wakeup_time
+          - input_boolean.wakeup_enabled
+          - input_boolean.wakeup_weekend
+
+      - type: light
+        entity: light.bed_lights
+
+     #- type: entities:
+     #   title: Bed Lights
+     #   show_header_toggle: false
+     #   entities:
+     #     - entity: light.bed_lights
+     #       type: custom:light-slider
+                  
+       
   - icon: mdi:cast
     title: Chromecasts
     cards:
